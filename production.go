@@ -10,10 +10,17 @@ import (
 	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
 )
 
-func main() {
+var ginLambda *ginadapter.GinLambda
+
+func init() {
 	r := setup()
-	ginLambda := ginadapter.New(r)
-	lambda.Start(func(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-		return ginLambda.ProxyWithContext(ctx, req)
-	})
+	ginLambda = ginadapter.New(r)
+}
+
+func handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	return ginLambda.ProxyWithContext(ctx, req)
+}
+
+func main() {
+	lambda.Start(handler)
 }

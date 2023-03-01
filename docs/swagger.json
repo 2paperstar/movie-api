@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0.0"
     },
-    "host": "https://test.com:8080",
+    "host": "https://test.paperst.ar/",
     "paths": {
         "/movies": {
             "get": {
