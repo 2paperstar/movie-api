@@ -12,7 +12,10 @@ func GetMovies(c *gin.Context) {
 }
 
 func GetMovieDetail(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"movie": service.GetMovieDetail(c.Param("id")),
-	})
+	movie := service.GetMovieDetail(c.Param("id"))
+	if movie == nil {
+		c.JSON(404, gin.H{"message": "movie not found"})
+		return
+	}
+	c.JSON(200, movie)
 }
