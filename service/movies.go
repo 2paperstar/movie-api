@@ -3,27 +3,44 @@ package service
 import (
 	"github.com/2paperstar/movie-api/database"
 	"github.com/2paperstar/movie-api/model"
+	"github.com/2paperstar/movie-api/utils"
 )
 
+func convertMovie(movie database.Movie, detail bool) model.Movie {
+	data := model.Movie{
+		ID:           movie.Imdb,
+		Title:        movie.Title,
+		Genre:        movie.Genre,
+		PosterURL:    utils.IdToPosterUrl(movie.Identifier),
+		ReviewCounts: 0,
+		ReviewScore:  movie.Rating,
+	}
+	if len(movie.Director) > 0 {
+		data.Director = &movie.Director[0]
+	}
+	if detail {
+		data.Story = movie.Story
+	}
+	return data
+}
+
 func GetMovies() *[]model.Movie {
-	const CDN_BASE = "https://boomerangdb.nyc3.cdn.digitaloceanspaces.com/"
-	movies := database.GetMovieData()
+	movies := database.GetMoviesData()
 
 	var movieList = make([]model.Movie, len(*movies))
 
 	for index, movie := range *movies {
-		movieList[index] = model.Movie{
-			ID:           movie.Imdb,
-			Title:        movie.Title,
-			Genre:        movie.Genre,
-			PosterURL:    CDN_BASE + "posters/webp/" + movie.Identifier + ".webp",
-			ReviewCounts: 0,
-			ReviewScore:  movie.Rating,
-		}
-		if len(movie.Director) > 0 {
-			movieList[index].Director = &movie.Director[0]
-		}
+		movieList[index] = convertMovie(movie, false)
 	}
 
 	return &movieList
+}
+
+func GetMovieDetail(id string) *model.Movie {
+	movie := database.GetMovieByID(id)
+	if movie == nil {
+		return nil
+	}
+	data := convertMovie(*movie, true)
+	return &data
 }

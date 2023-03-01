@@ -34,8 +34,18 @@ type Movie struct {
 //go:embed movies.json
 var moviesRawData []byte
 
-func GetMovieData() *[]Movie {
+func GetMoviesData() *[]Movie {
 	var movies []Movie
 	json.Unmarshal(moviesRawData, &movies)
 	return &movies
+}
+
+func GetMovieByID(id string) *Movie {
+	movies := GetMoviesData()
+	for _, movie := range *movies {
+		if movie.Imdb == id {
+			return &movie
+		}
+	}
+	return nil
 }

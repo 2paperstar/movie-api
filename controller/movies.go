@@ -10,3 +10,9 @@ func GetMovies(c *gin.Context) {
 		"movies": service.GetMovies(),
 	})
 }
+
+func GetMovieDetail(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"movie": service.GetMovieDetail(c.Param("id")),
+	})
+}

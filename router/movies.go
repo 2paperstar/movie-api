@@ -7,4 +7,5 @@ import (
 
 func movies(r *gin.RouterGroup) {
 	r.GET("/", controller.GetMovies)
+	r.GET("/:id", controller.GetMovieDetail)
 }
