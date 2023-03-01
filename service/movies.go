@@ -24,7 +24,7 @@ func convertMovie(movie database.Movie, detail bool) model.Movie {
 	return data
 }
 
-func GetMovies() *[]model.Movie {
+func GetMovies() []model.Movie {
 	movies := database.GetMoviesData()
 
 	var movieList = make([]model.Movie, len(*movies))
@@ -33,7 +33,7 @@ func GetMovies() *[]model.Movie {
 		movieList[index] = convertMovie(movie, false)
 	}
 
-	return &movieList
+	return movieList
 }
 
 func GetMovieDetail(id string) *model.Movie {
