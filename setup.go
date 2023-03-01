@@ -1,14 +1,8 @@
 package main
 
 import (
-	"log"
-	"os"
-
 	"github.com/2paperstar/movie-api/router"
-
-	"github.com/joho/godotenv"
-
-	_ "github.com/2paperstar/movie-api/docs"
+	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -18,12 +12,8 @@ import (
 // @version 1.0.0
 
 // @host https://test.com:8080
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
+func setup() *gin.Engine {
 	r := router.SetupRouter()
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Run(":" + os.Getenv("PORT"))
+	return r
 }
