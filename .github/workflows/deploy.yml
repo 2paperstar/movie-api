@@ -20,7 +20,7 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Build Binary
         run: |
-          cd function && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o hello && zip function.zip hello
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o hello && zip function.zip hello
       - name: Deploy to Lambda
         uses: appleboy/lambda-action@master
         with:
@@ -28,4 +28,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: ${{ secrets.AWS_FUNCTION_NAME }}
-          zip_file: function/function.zip
+          zip_file: function.zip
