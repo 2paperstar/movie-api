@@ -1,0 +1,89 @@
+definitions:
+  model.Empty:
+    type: object
+  model.Error:
+    properties:
+      message:
+        type: string
+    type: object
+  model.Movie:
+    properties:
+      director:
+        type: string
+      genre:
+        items:
+          type: string
+        type: array
+      id:
+        type: string
+      poster_url:
+        type: string
+      review_counts:
+        type: integer
+      review_score:
+        type: number
+      story:
+        type: string
+      title:
+        type: string
+    type: object
+host: https://test.com:8080
+info:
+  contact: {}
+  description: This is a sample server for a movie API.
+  title: Movie API
+  version: 1.0.0
+paths:
+  /movies:
+    get:
+      description: Get all movies
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: string
+      - description: Offset
+        in: query
+        name: offset
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/model.Empty'
+            - properties:
+                movies:
+                  items:
+                    $ref: '#/definitions/model.Movie'
+                  type: array
+              type: object
+      summary: Get all movies
+      tags:
+      - movies
+  /movies/{id}:
+    get:
+      description: Get movie detail (including story)
+      parameters:
+      - description: Movie ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Movie'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/model.Error'
+      summary: Get movie detail
+      tags:
+      - movies
+swagger: "2.0"
