@@ -1,18 +1,21 @@
 package service
 
 import (
+	"math/rand"
+
 	"github.com/2paperstar/movie-api/database"
 	"github.com/2paperstar/movie-api/model"
 	"github.com/2paperstar/movie-api/utils"
 )
 
 func convertMovie(movie database.Movie, detail bool) model.Movie {
+	randomReviewCounts := rand.Intn(1000)
 	data := model.Movie{
 		ID:           movie.Imdb,
 		Title:        movie.Title,
 		Genre:        movie.Genre,
 		PosterURL:    utils.IdToPosterUrl(movie.Identifier),
-		ReviewCounts: 0,
+		ReviewCounts: randomReviewCounts,
 		ReviewScore:  movie.Rating,
 	}
 	if len(movie.Director) > 0 {
