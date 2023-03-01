@@ -12,7 +12,7 @@ import (
 // @description This is a sample server for a movie API.
 // @version 1.0.0
 
-// @host https://test.paperst.ar/
+// @host test.paperst.ar
 func setup() *gin.Engine {
 	r := router.SetupRouter()
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
