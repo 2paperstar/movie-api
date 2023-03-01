@@ -15,11 +15,13 @@ func GetMovies() *[]model.Movie {
 		movieList[index] = model.Movie{
 			ID:           movie.Imdb,
 			Title:        movie.Title,
-			Director:     movie.Director[0],
 			Genre:        movie.Genre,
 			PosterURL:    CDN_BASE + "posters/webp/" + movie.Identifier + ".webp",
 			ReviewCounts: 0,
 			ReviewScore:  movie.Rating,
+		}
+		if len(movie.Director) > 0 {
+			movieList[index].Director = &movie.Director[0]
 		}
 	}
 
