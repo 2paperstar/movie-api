@@ -57,7 +57,7 @@ func GetMovieDetail(c *fiber.Ctx) error {
 	return c.JSON(movie)
 }
 
-// @Summary Get movie comments
+// @Summary Get movie comments - 구현중
 // @Description Get comments of movies
 // @Tags movies
 // @Produce json

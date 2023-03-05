@@ -86,7 +86,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.AuthResponse'
-      summary: Authorize with credential
+      summary: Authorize with credential - 구현 안 됨
       tags:
       - auth
   /auth/refresh:
@@ -108,7 +108,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.AuthResponse'
-      summary: Authorize with refresh token
+      summary: Authorize with refresh token - 구현 안 됨
       tags:
       - auth
   /movies:
@@ -198,7 +198,7 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/model.Error'
-      summary: Get movie comments
+      summary: Get movie comments - 구현중
       tags:
       - movies
 swagger: "2.0"

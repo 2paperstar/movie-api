@@ -2,7 +2,7 @@ package controller
 
 import "github.com/gofiber/fiber/v2"
 
-// @Summary Authorize with credential
+// @Summary Authorize with credential - 구현 안 됨
 // @Description Authorize with id and password
 // @Tags auth
 // @Accept json
@@ -14,7 +14,7 @@ func AuthorizeWithCredential(c *fiber.Ctx) error {
 	return nil
 }
 
-// @Summary Authorize with refresh token
+// @Summary Authorize with refresh token - 구현 안 됨
 // @Description Authorize with refresh token
 // @Tags auth
 // @Accept json

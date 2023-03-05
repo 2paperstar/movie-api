@@ -27,7 +27,7 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Authorize with credential",
+                "summary": "Authorize with credential - 구현 안 됨",
                 "parameters": [
                     {
                         "description": "Credential",
@@ -61,7 +61,7 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Authorize with refresh token",
+                "summary": "Authorize with refresh token - 구현 안 됨",
                 "parameters": [
                     {
                         "description": "RefreshToken",
@@ -176,7 +176,7 @@ const docTemplate = `{
                 "tags": [
                     "movies"
                 ],
-                "summary": "Get movie comments",
+                "summary": "Get movie comments - 구현중",
                 "parameters": [
                     {
                         "type": "string",
