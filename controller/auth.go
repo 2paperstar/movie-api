@@ -13,3 +13,15 @@ import "github.com/gofiber/fiber/v2"
 func AuthorizeWithCredential(c *fiber.Ctx) error {
 	return nil
 }
+
+// @Summary Authorize with refresh token
+// @Description Authorize with refresh token
+// @Tags auth
+// @Accept json
+// @Produce json
+// @Param request body model.RefreshToken true "RefreshToken"
+// @Success 200 {object} model.AuthResponse
+// @Router /auth/refresh [post]
+func AuthorizeWithRefreshToken(c *fiber.Ctx) error {
+	return nil
+}

@@ -5,6 +5,10 @@ type Credential struct {
 	Password string `json:"password"`
 }
 
+type RefreshToken struct {
+	RefreshToken string `json:"refreshToken"`
+}
+
 type AuthResponse struct {
 	AccessToken  string `json:"accessToken"`
 	RefreshToken string `json:"refreshToken"`

@@ -56,6 +56,11 @@ definitions:
       title:
         type: string
     type: object
+  model.RefreshToken:
+    properties:
+      refreshToken:
+        type: string
+    type: object
 info:
   contact: {}
   description: This is a sample server for a movie API.
@@ -82,6 +87,28 @@ paths:
           schema:
             $ref: '#/definitions/model.AuthResponse'
       summary: Authorize with credential
+      tags:
+      - auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Authorize with refresh token
+      parameters:
+      - description: RefreshToken
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.RefreshToken'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.AuthResponse'
+      summary: Authorize with refresh token
       tags:
       - auth
   /movies:
