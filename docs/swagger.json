@@ -4,7 +4,7 @@
         "description": "This is a sample server for a movie API.",
         "title": "Movie API",
         "contact": {},
-        "version": "1.2.0"
+        "version": "2.0.0"
     },
     "paths": {
         "/auth/authorize": {
@@ -209,16 +209,16 @@
                 "content": {
                     "type": "string"
                 },
-                "created_at": {
+                "createdAt": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "movie_id": {
+                "movieId": {
                     "type": "string"
                 },
-                "updated_at": {
+                "updatedAt": {
                     "type": "string"
                 }
             }
@@ -260,13 +260,13 @@
                 "id": {
                     "type": "string"
                 },
-                "poster_url": {
+                "posterUrl": {
                     "type": "string"
                 },
-                "review_counts": {
+                "reviewCounts": {
                     "type": "integer"
                 },
-                "review_score": {
+                "reviewScore": {
                     "type": "number"
                 },
                 "story": {

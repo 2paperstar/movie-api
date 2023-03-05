@@ -217,16 +217,16 @@ const docTemplate = `{
                 "content": {
                     "type": "string"
                 },
-                "created_at": {
+                "createdAt": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "movie_id": {
+                "movieId": {
                     "type": "string"
                 },
-                "updated_at": {
+                "updatedAt": {
                     "type": "string"
                 }
             }
@@ -268,13 +268,13 @@ const docTemplate = `{
                 "id": {
                     "type": "string"
                 },
-                "poster_url": {
+                "posterUrl": {
                     "type": "string"
                 },
-                "review_counts": {
+                "reviewCounts": {
                     "type": "integer"
                 },
-                "review_score": {
+                "reviewScore": {
                     "type": "number"
                 },
                 "story": {
@@ -290,7 +290,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "1.2.0",
+	Version:          "2.0.0",
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
