@@ -1,8 +1,9 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gofiber/fiber/v2"
+)
 
-func SetupRouter(r *gin.Engine) *gin.Engine {
-	movies(r.Group("/movies"))
-	return r
+func SetupRouter(api fiber.Router) {
+	movies(api.Group("/movies"))
 }

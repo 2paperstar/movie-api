@@ -14,6 +14,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error loading .env file")
 	}
-	r := setup()
-	r.Run(":" + os.Getenv("PORT"))
+	app := setup()
+	err = app.Listen(":" + os.Getenv("PORT"))
+	if err != nil {
+		log.Fatalf("Error starting server: %s", err)
+	}
 }

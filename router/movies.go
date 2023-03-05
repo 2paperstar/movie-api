@@ -2,10 +2,10 @@ package router
 
 import (
 	"github.com/2paperstar/movie-api/controller"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
-func movies(r *gin.RouterGroup) {
-	r.GET("/", controller.GetMovies)
-	r.GET("/:id", controller.GetMovieDetail)
+func movies(api fiber.Router) {
+	api.Get("/", controller.GetMovies)
+	api.Get("/:id", controller.GetMovieDetail)
 }

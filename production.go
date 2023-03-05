@@ -7,18 +7,18 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
+	fiberadapter "github.com/awslabs/aws-lambda-go-api-proxy/fiber"
 )
 
-var ginLambda *ginadapter.GinLambda
+var fiberLambda *fiberadapter.FiberLambda
 
 func init() {
-	r := setup()
-	ginLambda = ginadapter.New(r)
+	app := setup()
+	fiberLambda = fiberadapter.New(app)
 }
 
 func handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	return ginLambda.ProxyWithContext(ctx, req)
+	return fiberLambda.ProxyWithContext(ctx, req)
 }
 
 func main() {

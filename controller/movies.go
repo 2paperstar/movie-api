@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"github.com/2paperstar/movie-api/service"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
 // @Summary Get all movies
@@ -15,7 +15,7 @@ import (
 // @Param offset query string false "Offset"
 // @Success 200 {object} model.Empty{movies=[]model.Movie}
 // @Router /movies [get]
-func GetMovies(c *gin.Context) {
+func GetMovies(c *fiber.Ctx) error {
 	limit, _ := strconv.Atoi(c.Query("limit"))
 	offset, _ := strconv.Atoi(c.Query("offset"))
 	if limit == 0 {
@@ -32,7 +32,7 @@ func GetMovies(c *gin.Context) {
 		limit = len(movies) - offset
 	}
 
-	c.JSON(200, gin.H{
+	return c.JSON(fiber.Map{
 		"movies": movies[offset : offset+limit],
 	})
 }
@@ -45,11 +45,12 @@ func GetMovies(c *gin.Context) {
 // @Success 200 {object} model.Movie
 // @Failure 404 {object} model.Error
 // @Router /movies/{id} [get]
-func GetMovieDetail(c *gin.Context) {
-	movie := service.GetMovieDetail(c.Param("id"))
+func GetMovieDetail(c *fiber.Ctx) error {
+	movie := service.GetMovieDetail(c.Params("id"))
 	if movie == nil {
-		c.JSON(404, gin.H{"message": "movie not found"})
-		return
+		return c.Status(404).JSON(fiber.Map{
+			"message": "movie not found",
+		})
 	}
-	c.JSON(200, movie)
+	return c.JSON(movie)
 }
