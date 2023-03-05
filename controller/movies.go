@@ -2,7 +2,9 @@ package controller
 
 import (
 	"strconv"
+	"time"
 
+	"github.com/2paperstar/movie-api/model"
 	"github.com/2paperstar/movie-api/service"
 	"github.com/gofiber/fiber/v2"
 )
@@ -53,4 +55,38 @@ func GetMovieDetail(c *fiber.Ctx) error {
 		})
 	}
 	return c.JSON(movie)
+}
+
+// @Summary Get movie comments
+// @Description Get comments of movies
+// @Tags movies
+// @Produce json
+// @Param id path string true "Movie ID"
+// @Success 200 {object} model.Empty{comments=[]model.Comment}
+// @Failure 404 {object} model.Error
+// @Router /movies/{id}/comments [get]
+func GetMovieComments(c *fiber.Ctx) error {
+	movie := service.GetMovieDetail(c.Params("id"))
+	if movie == nil {
+		return c.Status(404).JSON(fiber.Map{
+			"message": "movie not found",
+		})
+	}
+
+	comments := make([]model.Comment, 10)
+
+	for i := 0; i < 10; i++ {
+		comments[i] = model.Comment{
+			ID:        strconv.Itoa(i),
+			MovieID:   movie.ID,
+			Content:   "This is a comment",
+			Author:    "eeee",
+			CreatedAt: time.Now().UTC(),
+			UpdatedAt: time.Now().UTC(),
+		}
+	}
+
+	return c.JSON(fiber.Map{
+		"comments": comments,
+	})
 }

@@ -1,4 +1,19 @@
 definitions:
+  model.Comment:
+    properties:
+      author:
+        type: string
+      content:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      movie_id:
+        type: string
+      updated_at:
+        type: string
+    type: object
   model.Empty:
     type: object
   model.Error:
@@ -84,6 +99,36 @@ paths:
           schema:
             $ref: '#/definitions/model.Error'
       summary: Get movie detail
+      tags:
+      - movies
+  /movies/{id}/comments:
+    get:
+      description: Get comments of movies
+      parameters:
+      - description: Movie ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/model.Empty'
+            - properties:
+                comments:
+                  items:
+                    $ref: '#/definitions/model.Comment'
+                  type: array
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/model.Error'
+      summary: Get movie comments
       tags:
       - movies
 swagger: "2.0"

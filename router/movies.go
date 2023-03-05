@@ -8,4 +8,6 @@ import (
 func movies(api fiber.Router) {
 	api.Get("/", controller.GetMovies)
 	api.Get("/:id", controller.GetMovieDetail)
+
+	api.Get("/:id/comments", controller.GetMovieComments)
 }
