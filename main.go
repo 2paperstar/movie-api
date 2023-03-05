@@ -15,8 +15,9 @@ import (
 
 // @host test.paperst.ar
 func setup() *gin.Engine {
-	r := router.SetupRouter()
+	r := gin.Default()
 	r.Use(cors.Default())
+	router.SetupRouter(r)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return r
 }
