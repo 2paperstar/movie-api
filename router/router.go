@@ -4,6 +4,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func SetupRouter(api fiber.Router) {
+func SetupRouter(api *fiber.App) {
 	movies(api.Group("/movies"))
 }
