@@ -1,4 +1,11 @@
 definitions:
+  model.AuthResponse:
+    properties:
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+    type: object
   model.Comment:
     properties:
       author:
@@ -12,6 +19,13 @@ definitions:
       movie_id:
         type: string
       updated_at:
+        type: string
+    type: object
+  model.Credential:
+    properties:
+      id:
+        type: string
+      password:
         type: string
     type: object
   model.Empty:
@@ -48,6 +62,28 @@ info:
   title: Movie API
   version: 1.2.0
 paths:
+  /auth/authorize:
+    post:
+      consumes:
+      - application/json
+      description: Authorize with id and password
+      parameters:
+      - description: Credential
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.Credential'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.AuthResponse'
+      summary: Authorize with credential
+      tags:
+      - auth
   /movies:
     get:
       description: Get all movies
