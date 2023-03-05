@@ -10,7 +10,7 @@ import (
 
 // @title Movie API
 // @description This is a sample server for a movie API.
-// @version 1.0.1
+// @version 1.1.0
 
 // @host test.paperst.ar
 func setup() *fiber.App {
