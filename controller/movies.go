@@ -62,20 +62,24 @@ func GetMovieDetail(c *fiber.Ctx) error {
 // @Tags movies
 // @Produce json
 // @Param id path string true "Movie ID"
+// @Param limit query string false "Limit"
+// @Param offset query string false "Offset"
 // @Success 200 {object} model.Empty{comments=[]model.Comment}
 // @Failure 404 {object} model.Error
 // @Router /movies/{id}/comments [get]
 func GetMovieComments(c *fiber.Ctx) error {
 	movie := service.GetMovieDetail(c.Params("id"))
+	limit := c.QueryInt("limit", 10)
+	c.QueryInt("offset", 0)
 	if movie == nil {
 		return c.Status(404).JSON(fiber.Map{
 			"message": "movie not found",
 		})
 	}
 
-	comments := make([]model.Comment, 10)
+	comments := make([]model.Comment, limit)
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < limit; i++ {
 		comments[i] = model.Comment{
 			ID:        strconv.Itoa(i),
 			MovieID:   movie.ID,
