@@ -141,7 +141,11 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.AuthResponse'
-      summary: Register with credential - not implemented
+        "409":
+          description: Duplicated id
+          schema:
+            $ref: '#/definitions/model.Error'
+      summary: Register with credential
       tags:
       - auth
   /movies:

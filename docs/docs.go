@@ -92,7 +92,7 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Register with credential - not implemented",
+                "summary": "Register with credential",
                 "parameters": [
                     {
                         "description": "Register",
@@ -109,6 +109,12 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.AuthResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Duplicated id",
+                        "schema": {
+                            "$ref": "#/definitions/model.Error"
                         }
                     }
                 }
