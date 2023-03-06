@@ -6,4 +6,5 @@ import (
 
 func SetupRouter(api *fiber.App) {
 	movies(api.Group("/movies"))
+	auth(api.Group("/auth"))
 }
