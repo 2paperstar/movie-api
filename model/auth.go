@@ -5,6 +5,17 @@ type Credential struct {
 	Password string `json:"password"`
 }
 
+type UserInfo struct {
+	Email    string `json:"email"`
+	Nickname string `json:"nickname"`
+	Phone    string `json:"phone"`
+}
+
+type RegisterForm struct {
+	Credential
+	UserInfo
+}
+
 type RefreshToken struct {
 	RefreshToken string `json:"refreshToken"`
 }

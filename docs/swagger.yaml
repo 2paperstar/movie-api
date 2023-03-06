@@ -61,6 +61,19 @@ definitions:
       refreshToken:
         type: string
     type: object
+  model.RegisterForm:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      nickname:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+    type: object
 info:
   contact: {}
   description: This is a sample server for a movie API.
@@ -109,6 +122,26 @@ paths:
           schema:
             $ref: '#/definitions/model.AuthResponse'
       summary: Authorize with refresh token - 구현 안 됨
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register with id and password
+      parameters:
+      - description: Register
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.RegisterForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.AuthResponse'
+      summary: Register with credential - 구현 안 됨
       tags:
       - auth
   /movies:
