@@ -10,7 +10,7 @@ import (
 
 // @title Movie API
 // @description This is a sample server for a movie API.
-// @version 2.0.0
+// @version 2.0.1
 func setup() *fiber.App {
 	app := fiber.New()
 	app.Use(cors.New())
