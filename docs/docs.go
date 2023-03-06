@@ -27,7 +27,7 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Authorize with credential - 구현 안 됨",
+                "summary": "Authorize with credential - not implemented",
                 "parameters": [
                     {
                         "description": "Credential",
@@ -61,7 +61,7 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Authorize with refresh token - 구현 안 됨",
+                "summary": "Authorize with refresh token - not implemented",
                 "parameters": [
                     {
                         "description": "RefreshToken",
@@ -92,7 +92,7 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Register with credential - 구현 안 됨",
+                "summary": "Register with credential - not implemented",
                 "parameters": [
                     {
                         "description": "Register",
@@ -207,7 +207,7 @@ const docTemplate = `{
                 "tags": [
                     "movies"
                 ],
-                "summary": "Get movie comments - 구현중",
+                "summary": "Get movie comments - currently implementing...",
                 "parameters": [
                     {
                         "type": "string",

@@ -99,7 +99,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.AuthResponse'
-      summary: Authorize with credential - 구현 안 됨
+      summary: Authorize with credential - not implemented
       tags:
       - auth
   /auth/refresh:
@@ -121,7 +121,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.AuthResponse'
-      summary: Authorize with refresh token - 구현 안 됨
+      summary: Authorize with refresh token - not implemented
       tags:
       - auth
   /auth/register:
@@ -141,7 +141,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.AuthResponse'
-      summary: Register with credential - 구현 안 됨
+      summary: Register with credential - not implemented
       tags:
       - auth
   /movies:
@@ -231,7 +231,7 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/model.Error'
-      summary: Get movie comments - 구현중
+      summary: Get movie comments - currently implementing...
       tags:
       - movies
 swagger: "2.0"
