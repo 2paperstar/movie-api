@@ -12,6 +12,12 @@ import (
 )
 
 var ErrLoginFailed = errors.New("login failed")
+var ErrInvalidToken = errors.New("invalid token")
+
+type authTokenPayload struct {
+	UID                string `json:"uid"`
+	jwt.StandardClaims `json:",inline"`
+}
 
 func RegisterWithCredential(form *model.RegisterForm) (*model.UserInfo, error) {
 	return database.CreateUser(context.TODO(), form)
@@ -30,16 +36,20 @@ func AuthorizeWithCredential(form *model.Credential) (*model.UserInfo, error) {
 }
 
 func GenerateJwt(user *model.UserInfo) (*model.AuthResponse, error) {
-	accessTokenString, err := jwt.NewWithClaims(jwt.SigningMethodHS512, jwt.StandardClaims{
-		Id:        user.UID,
-		ExpiresAt: time.Now().Add(time.Hour).Unix(),
+	accessTokenString, err := jwt.NewWithClaims(jwt.SigningMethodHS512, authTokenPayload{
+		UID: user.UID,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Hour).Unix(),
+		},
 	}).SignedString(config.JwtSecret)
 	if err != nil {
 		return nil, err
 	}
-	refreshTokenString, err := jwt.NewWithClaims(jwt.SigningMethodHS512, jwt.StandardClaims{
-		Id:        user.UID,
-		ExpiresAt: time.Now().Add(time.Hour * 24 * 30).Unix(),
+	refreshTokenString, err := jwt.NewWithClaims(jwt.SigningMethodHS512, authTokenPayload{
+		UID: user.UID,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(time.Hour).Unix(),
+		},
 	}).SignedString(config.JwtSecret)
 	if err != nil {
 		return nil, err
@@ -48,4 +58,26 @@ func GenerateJwt(user *model.UserInfo) (*model.AuthResponse, error) {
 		AccessToken:  accessTokenString,
 		RefreshToken: refreshTokenString,
 	}, nil
+}
+
+func VerifyJwt(tokenString string) (*authTokenPayload, error) {
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, ErrInvalidToken
+		}
+		return config.JwtSecret, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	payload, ok := token.Claims.(jwt.MapClaims)
+	if !ok {
+		return nil, ErrInvalidToken
+	}
+
+	authPayload := new(authTokenPayload)
+	authPayload.UID = payload["uid"].(string)
+	authPayload.ExpiresAt = int64(payload["exp"].(float64))
+
+	return authPayload, nil
 }

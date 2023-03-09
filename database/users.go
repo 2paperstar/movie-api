@@ -19,7 +19,12 @@ func CreateUser(ctx context.Context, payload *model.RegisterForm) (*model.UserIn
 		}
 		return nil, err
 	}
-	user := usersCollection.FindOne(ctx, bson.M{"_id": result.InsertedID})
+
+	return GetUserByUID(ctx, result.InsertedID)
+}
+
+func GetUserByUID(ctx context.Context, uid any) (*model.UserInfo, error) {
+	user := usersCollection.FindOne(ctx, bson.M{"_id": uid})
 	if err := user.Err(); err != nil {
 		return nil, err
 	}

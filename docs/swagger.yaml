@@ -74,6 +74,17 @@ definitions:
       phone:
         type: string
     type: object
+  model.UserInfo:
+    properties:
+      email:
+        type: string
+      nickname:
+        type: string
+      phone:
+        type: string
+      uid:
+        type: string
+    type: object
 info:
   contact: {}
   description: This is a sample server for a movie API.
@@ -238,4 +249,24 @@ paths:
       summary: Get movie comments - currently implementing...
       tags:
       - movies
+  /users/me:
+    get:
+      description: Get information of logged in user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.UserInfo'
+      security:
+      - JWT: []
+      summary: Get my information
+      tags:
+      - users
+securityDefinitions:
+  JWT:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
