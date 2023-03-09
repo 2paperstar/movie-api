@@ -20,7 +20,6 @@ func RegisterWithCredential(c *fiber.Ctx) error {
 	form := new(model.RegisterForm)
 	if err := c.BodyParser(form); err != nil {
 		return err
-
 	}
 
 	user, err := service.RegisterWithCredential(form)
@@ -34,7 +33,13 @@ func RegisterWithCredential(c *fiber.Ctx) error {
 			"message": err.Error(),
 		})
 	}
-	return c.JSON(user)
+	token, err := service.GenerateJwt(user)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": err.Error(),
+		})
+	}
+	return c.JSON(token)
 }
 
 // @Summary Authorize with credential - not implemented

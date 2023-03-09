@@ -1,19 +1,24 @@
 package model
 
 type Credential struct {
-	ID       string `json:"id" bson:"_id"`
+	ID       string `json:"id" bson:"id"`
 	Password string `json:"password" bson:"password"`
 }
 
-type UserInfo struct {
+type UserInfoForm struct {
 	Email    string `json:"email" bson:"email"`
 	Nickname string `json:"nickname" bson:"nickname"`
 	Phone    string `json:"phone" bson:"phone"`
 }
 
+type UserInfo struct {
+	UserInfoForm `bson:",inline"`
+	UID          string `json:"uid" bson:"_id"`
+}
+
 type RegisterForm struct {
-	Credential `bson:",inline"`
-	UserInfo   `bson:",inline"`
+	Credential   `bson:",inline"`
+	UserInfoForm `bson:",inline"`
 }
 
 type RefreshToken struct {
