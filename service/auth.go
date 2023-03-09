@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/2paperstar/movie-api/config"
@@ -10,8 +11,22 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
+var ErrLoginFailed = errors.New("login failed")
+
 func RegisterWithCredential(form *model.RegisterForm) (*model.UserInfo, error) {
 	return database.CreateUser(context.TODO(), form)
+}
+
+func AuthorizeWithCredential(form *model.Credential) (*model.UserInfo, error) {
+	user, credential, err := database.GetUserByLoginID(context.TODO(), form.ID)
+	if err != nil {
+		return nil, ErrLoginFailed
+	}
+
+	if credential.Password != form.Password {
+		return nil, ErrLoginFailed
+	}
+	return user, nil
 }
 
 func GenerateJwt(user *model.UserInfo) (*model.AuthResponse, error) {

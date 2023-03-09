@@ -42,7 +42,7 @@ func RegisterWithCredential(c *fiber.Ctx) error {
 	return c.JSON(token)
 }
 
-// @Summary Authorize with credential - not implemented
+// @Summary Authorize with credential
 // @Description Authorize with id and password
 // @Tags auth
 // @Accept json
@@ -51,7 +51,29 @@ func RegisterWithCredential(c *fiber.Ctx) error {
 // @Success 200 {object} model.AuthResponse
 // @Router /auth/authorize [post]
 func AuthorizeWithCredential(c *fiber.Ctx) error {
-	return nil
+	form := new(model.Credential)
+	if err := c.BodyParser(form); err != nil {
+		return err
+	}
+
+	user, err := service.AuthorizeWithCredential(form)
+	if err != nil {
+		if err == service.ErrLoginFailed {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"message": err.Error(),
+			})
+		}
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": err.Error(),
+		})
+	}
+	token, err := service.GenerateJwt(user)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": err.Error(),
+		})
+	}
+	return c.JSON(token)
 }
 
 // @Summary Authorize with refresh token - not implemented

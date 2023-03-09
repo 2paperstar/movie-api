@@ -28,3 +28,16 @@ func CreateUser(ctx context.Context, payload *model.RegisterForm) (*model.UserIn
 	user.Decode(userInfo)
 	return userInfo, nil
 }
+
+func GetUserByLoginID(ctx context.Context, id string) (*model.UserInfo, *model.Credential, error) {
+	user := usersCollection.FindOne(ctx, bson.M{"id": id})
+	if err := user.Err(); err != nil {
+		return nil, nil, err
+	}
+
+	userInfo := new(model.UserInfo)
+	credential := new(model.Credential)
+	user.Decode(userInfo)
+	user.Decode(credential)
+	return userInfo, credential, nil
+}

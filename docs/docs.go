@@ -27,7 +27,7 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Authorize with credential - not implemented",
+                "summary": "Authorize with credential",
                 "parameters": [
                     {
                         "description": "Credential",

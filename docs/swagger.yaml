@@ -99,7 +99,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.AuthResponse'
-      summary: Authorize with credential - not implemented
+      summary: Authorize with credential
       tags:
       - auth
   /auth/refresh:
