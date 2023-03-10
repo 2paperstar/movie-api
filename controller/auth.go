@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"github.com/2paperstar/movie-api/database"
 	"github.com/2paperstar/movie-api/model"
 	"github.com/2paperstar/movie-api/service"
 	"github.com/gofiber/fiber/v2"
@@ -24,7 +23,7 @@ func RegisterWithCredential(c *fiber.Ctx) error {
 
 	user, err := service.RegisterWithCredential(form)
 	if err != nil {
-		if err == database.ErrDuplicatedUser {
+		if err == service.ErrDuplicatedUser {
 			return c.Status(fiber.StatusConflict).JSON(fiber.Map{
 				"message": err.Error(),
 			})

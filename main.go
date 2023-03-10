@@ -10,7 +10,7 @@ import (
 
 // @title Movie API
 // @description This is a sample server for a movie API.
-// @version 2.0.1
+// @version 2.1.0
 // @securityDefinitions.apikey JWT
 // @in header
 // @name Authorization
