@@ -25,7 +25,7 @@ func GetMyInformation(c *fiber.Ctx) error {
 // @Produce json
 // @Param body body model.UserInfoForm true "User information"
 // @Success 200 {object} model.UserInfo
-// @Router /users/me [patch]
+// @Router /users/me [put]
 // @Security JWT
 func UpdateMyInformation(c *fiber.Ctx) error {
 	user := c.Locals("user").(*model.UserInfo)

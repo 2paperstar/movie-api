@@ -275,7 +275,7 @@ paths:
       summary: Get my information
       tags:
       - users
-    patch:
+    put:
       consumes:
       - application/json
       description: Update information of logged in user
