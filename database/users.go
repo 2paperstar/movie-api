@@ -5,6 +5,7 @@ import (
 
 	"github.com/2paperstar/movie-api/model"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func CreateUser(ctx context.Context, payload *model.RegisterForm) (*model.UserInfo, error) {
@@ -17,6 +18,9 @@ func CreateUser(ctx context.Context, payload *model.RegisterForm) (*model.UserIn
 }
 
 func GetUserByUID(ctx context.Context, uid any) (*model.UserInfo, error) {
+	if str := uid.(string); len(str) == 24 {
+		uid, _ = primitive.ObjectIDFromHex(str)
+	}
 	user := usersCollection.FindOne(ctx, bson.M{"_id": uid})
 	if err := user.Err(); err != nil {
 		return nil, err
