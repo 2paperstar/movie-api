@@ -13,6 +13,7 @@ type UserInfoForm struct {
 
 type UserInfo struct {
 	UserInfoForm `bson:",inline"`
+	ID           string `json:"id" bson:"id"`
 	UID          string `json:"uid" bson:"_id"`
 }
 
