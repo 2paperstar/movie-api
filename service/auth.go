@@ -44,7 +44,7 @@ func GenerateJwt(user *model.UserInfo) (*model.AuthResponse, error) {
 	refreshTokenString, err := jwt.NewWithClaims(jwt.SigningMethodHS512, authTokenPayload{
 		UID: user.UID,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour).Unix(),
+			ExpiresAt: time.Now().Add(time.Hour * 24 * 30).Unix(),
 		},
 	}).SignedString(config.JwtSecret)
 	if err != nil {
