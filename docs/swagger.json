@@ -4,7 +4,7 @@
         "description": "This is a sample server for a movie API.",
         "title": "Movie API",
         "contact": {},
-        "version": "2.1.0"
+        "version": "2.1.1"
     },
     "paths": {
         "/auth/authorize": {
@@ -281,6 +281,43 @@
                         }
                     }
                 }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Update information of logged in user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update my information",
+                "parameters": [
+                    {
+                        "description": "User information",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UserInfoForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.UserInfo"
+                        }
+                    }
+                }
             }
         }
     },
@@ -407,6 +444,9 @@
                 "email": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "nickname": {
                     "type": "string"
                 },
@@ -414,6 +454,20 @@
                     "type": "string"
                 },
                 "uid": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.UserInfoForm": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "phone": {
                     "type": "string"
                 }
             }

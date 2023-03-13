@@ -78,6 +78,8 @@ definitions:
     properties:
       email:
         type: string
+      id:
+        type: string
       nickname:
         type: string
       phone:
@@ -85,11 +87,20 @@ definitions:
       uid:
         type: string
     type: object
+  model.UserInfoForm:
+    properties:
+      email:
+        type: string
+      nickname:
+        type: string
+      phone:
+        type: string
+    type: object
 info:
   contact: {}
   description: This is a sample server for a movie API.
   title: Movie API
-  version: 2.1.0
+  version: 2.1.1
 paths:
   /auth/authorize:
     post:
@@ -262,6 +273,29 @@ paths:
       security:
       - JWT: []
       summary: Get my information
+      tags:
+      - users
+    patch:
+      consumes:
+      - application/json
+      description: Update information of logged in user
+      parameters:
+      - description: User information
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UserInfoForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.UserInfo'
+      security:
+      - JWT: []
+      summary: Update my information
       tags:
       - users
 securityDefinitions:

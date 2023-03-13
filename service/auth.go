@@ -13,18 +13,10 @@ import (
 
 var ErrLoginFailed = errors.New("login failed")
 var ErrInvalidToken = errors.New("invalid token")
-var ErrDuplicatedUser = errors.New("duplicated user")
 
 type authTokenPayload struct {
 	UID                string `json:"uid"`
 	jwt.StandardClaims `json:",inline"`
-}
-
-func RegisterWithCredential(form *model.RegisterForm) (*model.UserInfo, error) {
-	if _, _, err := database.GetUserByLoginID(context.TODO(), form.ID); err == nil {
-		return nil, ErrDuplicatedUser
-	}
-	return database.CreateUser(context.TODO(), form)
 }
 
 func AuthorizeWithCredential(form *model.Credential) (*model.UserInfo, error) {

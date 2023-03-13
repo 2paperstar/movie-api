@@ -7,4 +7,5 @@ import (
 
 func users(api fiber.Router) {
 	api.Get("/me", RequireAuth, controller.GetMyInformation)
+	api.Put("/me", RequireAuth, controller.UpdateMyInformation)
 }

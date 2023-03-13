@@ -289,6 +289,43 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "Update information of logged in user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update my information",
+                "parameters": [
+                    {
+                        "description": "User information",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UserInfoForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.UserInfo"
+                        }
+                    }
+                }
             }
         }
     },
@@ -415,6 +452,9 @@ const docTemplate = `{
                 "email": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "string"
+                },
                 "nickname": {
                     "type": "string"
                 },
@@ -422,6 +462,20 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "uid": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.UserInfoForm": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "phone": {
                     "type": "string"
                 }
             }
@@ -438,7 +492,7 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "2.1.0",
+	Version:          "2.1.1",
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
